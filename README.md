@@ -24,3 +24,10 @@ Jinja2: To dynamically render HTML templates based on the backend logic.
 APIs:
 Open Food Facts API: Retrieves detailed product information based on barcode or product name.
 OpenFDA API: Checks if the ingredients in the product comply with FDA regulations.
+
+PROJECT BY RVCE COLLEGE STUDENTS:
+ADITYA K (1RV23ME011)
+ANSH RAVI KASHYAP (1RV23CS040)
+SHREYA RAVI (1RV23CD051)
+POORVI BELLUR (1RV23CD037)
+
