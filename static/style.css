@@ -1,0 +1,138 @@
+/* General settings for the dark background */
+body {
+    background-color: #15202b;
+    color: #e1e8ed;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* General link styling */
+a {
+    color: #1da1f2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Container settings */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #1c2938;
+    padding: 10px 20px;
+    border-bottom: 1px solid #38444d;
+}
+
+.navbar-brand {
+    color: #1da1f2;
+    font-weight: bold;
+}
+
+.navbar-item {
+    color: #e1e8ed;
+}
+
+/* Form styling */
+form {
+    background-color: #192734;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="submit"] {
+    background-color: #253341;
+    color: #e1e8ed;
+    border: 1px solid #38444d;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+input[type="text"]::placeholder {
+    color: #8899a6;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    background-color: #1da1f2;
+    border: none;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover {
+    background-color: #1a91da;
+}
+
+/* Table for displaying product information */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #38444d;
+}
+
+th {
+    background-color: #1c2938;
+}
+
+td {
+    background-color: #192734;
+}
+
+/* Button styling */
+button {
+    background-color: #1da1f2;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #1a91da;
+}
+
+/* Footer styling */
+footer {
+    background-color: #15202b;
+    color: #8899a6;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #38444d;
+}
+
+footer a {
+    color: #1da1f2;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}

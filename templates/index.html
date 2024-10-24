@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Compliance Checker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Include the QuaggaJS library for barcode scanning -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Food Compliance Checker</h1>
+
+        <!-- Barcode Scanning Section -->
+        <div id="scanner-container">
+            <h2>Scan Barcode</h2>
+            <div id="interactive" class="viewport"></div>
+            <button onclick="startScanner()">Start Scanner</button>
+            <button onclick="stopScanner()">Stop Scanner</button>
+            <p id="barcode-result">Barcode will appear here once scanned.</p>
+        </div>
+
+        <!-- Barcode Input Section -->
+        <h2>Enter Barcode Manually</h2>
+        <form method="POST" action="/">
+            <label for="barcode">Barcode:</label>
+            <input type="text" id="barcode" name="barcode" placeholder="Enter barcode manually" value="">
+            <input type="submit" value="Check Compliance">
+        </form>
+
+        <!-- Product Search Section -->
+        <h2>Search for Products by Name</h2>
+        <form method="POST" action="/">
+            <label for="query">Product Name:</label>
+            <input type="text" id="query" name="query" placeholder="Search products by name">
+            <input type="submit" value="Search">
+        </form>
+
+        <!-- Display Product Information if available -->
+        {% if product_info %}
+            <h2>Product Information</h2>
+            <ul>
+                <li><strong>Name:</strong> {{ product_info.name }}</li>
+                <li><strong>Brand:</strong> {{ product_info.brands }}</li>
+                <li><strong>Ingredients:</strong> {{ product_info.ingredients | join(', ') }}</li>
+                <li><strong>Nutritional Information:</strong></li>
+                <ul>
+                    {% for key, value in product_info.nutritional_info.items() %}
+                        <li>{{ key }}: {{ value }}</li>
+                    {% endfor %}
+                </ul>
+                <li><strong>Labels:</strong> {{ product_info.labels | join(', ') }}</li>
+                <li><strong>Allergens:</strong> {{ product_info.allergens | join(', ') }}</li>
+            </ul>
+        {% endif %}
+
+        <!-- Display FDA Compliance Report if available -->
+        {% if fda_compliance_report %}
+            <h2>FDA Compliance Report</h2>
+            <ul>
+                {% for issue in fda_compliance_report %}
+                    <li>{{ issue }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- Display Search Results if available -->
+        {% if search_results %}
+            <h2>Search Results</h2>
+            <ul>
+                {% for product in search_results %}
+                    <li>{{ product['product_name'] }} - Barcode: {{ product['code'] }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- QuaggaJS Barcode Scanner Script -->
+    <script>
+        function startScanner() {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#interactive'),
+                    constraints: {
+                        width: 640,
+                        height: 480,
+                        facingMode: "environment" // Use the back camera for mobile
+                    }
+                },
+                decoder: {
+                    readers: ["ean_reader", "upc_reader", "code_128_reader"] // List of supported barcode types
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                Quagga.start();
+            });
+
+            Quagga.onDetected(function (result) {
+                const code = result.codeResult.code;
+                document.getElementById("barcode-result").innerText = "Scanned Barcode: " + code;
+                document.getElementById("barcode").value = code; // Automatically fill the barcode input field
+            });
+        }
+
+        function stopScanner() {
+            Quagga.stop();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
